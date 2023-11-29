@@ -1,0 +1,32 @@
+const int sensorPin = A0;  
+const int ledPin = 13;    
+
+void setup() {
+  pinMode(ledPin, OUTPUT);  
+  Serial.begin(9600);       
+}
+
+void loop() {
+  
+  int sensorValue = analogRead(sensorPin);
+  
+  
+  float temperatureC = (sensorValue * 0.0048828125) * 100.0;
+
+  Serial.print("Temperature: ");
+  Serial.print(temperatureC);
+  Serial.println(" C");
+
+  if (temperatureC < 30.0) {
+    blinkLED(250);  
+  } else {
+    blinkLED(500);  
+  }
+}
+
+void blinkLED(int interval) {
+  digitalWrite(ledPin, HIGH);  
+  delay(interval);              
+  digitalWrite(ledPin, LOW);   
+  delay(interval);            
+}
